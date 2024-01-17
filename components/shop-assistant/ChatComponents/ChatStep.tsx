@@ -282,7 +282,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
           <AutosizeTextarea
             maxRows={7}
             minRows={1}
-            class="w-72 resize-none h-5 pr-11 sm:pr-2 text-tertiary bg-transparent text-sm placeholder:text-tertiary placeholder:opacity-50 focus-visible:outline-0"
+            class="w-72 resize-none h-5 pr-11 sm:pr-2 text-tertiary bg-transparent text-sm placeholder:text-tertiary focus-visible:outline-0"
             ref={userInput}
             name="userInput"
             placeholder="Type to reply"

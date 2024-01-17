@@ -11,9 +11,9 @@ export default {
         sliding: "sliding 30s linear infinite",
       },
       colors: {
-        primary: "var(--primary-color-hex)",
-        secondary: "var(--secondary-color-hex)",
-        tertiary: "var(--tertiary-color-hex)",
+        chatPrimary: "var(--primary-color-hex)",
+        chatSecondary: "var(--secondary-color-hex)",
+        chatTertiary: "var(--tertiary-color-hex)",
       },
       keyframes: {
         sliding: {

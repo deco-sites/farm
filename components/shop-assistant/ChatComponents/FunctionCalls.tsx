@@ -85,7 +85,7 @@ function ProductCard({ product }: { product: Product }) {
         <img
           src={product.image[0].url}
           alt={product.name}
-          class="w-40 h-40 max-w-fit rounded-md"
+          class="w-fit h-44 max-w-fit rounded-md"
         />
       </a>
       <div class="flex flex-col w-fit h-full space-y-4 py-4">
@@ -167,7 +167,7 @@ const ProductCarousel = ({ products }: { products: Product[] }) => {
               <img
                 src={product.image[0].url}
                 alt={product.image[0].name}
-                class="w-28 h-28 max-w-fit rounded-md"
+                class="w-fit h-32 max-w-fit rounded-md"
               />
             </a>
             <div class="flex flex-col gap-4 w-full max-w-[10rem]">
