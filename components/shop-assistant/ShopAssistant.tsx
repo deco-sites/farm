@@ -299,7 +299,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
               style={{ animation: "pulse 1.5s infinite" }}
               class={`mr-6 ${
                 isCartExpanded ? "sm:mr-[28rem]" : "sm:mr-8"
-              } mb-8 sm:mb-0 bg-secondary rounded-full flex justify-center items-center w-16 h-16 p-4`}
+              } mb-8 sm:mb-0 bg-chatSecondary rounded-full flex justify-center items-center w-16 h-16 p-4`}
             >
               {logo
                 ? (

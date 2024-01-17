@@ -256,7 +256,7 @@ function OptionsButtonGroup(
           <div class="gap-2 flex flex-row items-center">
             {(content as MessageContentText).options.map((option, index) => (
               <button
-                class="p-2 text-tertiary rounded-2xl bg-secondary text-xs"
+                class="p-2 text-tertiary rounded-2xl bg-chatSecondary text-xs"
                 key={index}
                 onClick={() => sendBtnClickMessage(option)}
               >
