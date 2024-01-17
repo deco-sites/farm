@@ -108,7 +108,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
     const host = window.location.host;
     const websocket = window.location.protocol === "https:" ? "wss" : "ws";
     ws.value = new WebSocket(
-      `${websocket}://${host}/live/invoke/ai-assistants/actions/chat.ts?assistant=deco`,
+      `${websocket}://${host}/live/invoke/ai-assistants/actions/chat.ts?assistant=farm`,
     );
 
     // Messages with type function_call, start_function_call or message belongs to this category of messages
