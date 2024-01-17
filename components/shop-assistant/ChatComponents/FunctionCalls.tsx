@@ -74,26 +74,7 @@ function ProductShelf({ products }: { products: Product[] }) {
   );
 }
 
-function extractTitleAndDescription(htmlString: string) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, "text/html");
-
-  const title = doc.querySelector("h1, h2, h3, h4, h5, h6")?.textContent ||
-    "";
-
-  const titleElement = doc.querySelector("h1, h2, h3, h4, h5, h6");
-  if (titleElement) titleElement.remove();
-  const description = doc.body.textContent || "";
-
-  return { title, description };
-}
-
 function ProductCard({ product }: { product: Product }) {
-  const quantity = useSignal(1);
-  const { title, description } = extractTitleAndDescription(
-    product.description,
-  );
-
   return (
     <div class="flex flex-row items-center bg-white gap-4 rounded-2xl text-black p-4">
       <a
@@ -104,7 +85,7 @@ function ProductCard({ product }: { product: Product }) {
         <img
           src={product.image[0].url}
           alt={product.name}
-          class="w-40 h-40 max-w-fit"
+          class="w-40 h-40 max-w-fit rounded-md"
         />
       </a>
       <div class="flex flex-col w-fit h-full space-y-4 py-4">
@@ -113,22 +94,20 @@ function ProductCard({ product }: { product: Product }) {
           target="_self"
           rel="noopener noreferrer"
         >
-          <p class="text-xs font-semibold">{title ?? product.name}</p>
+          <p class="text-xs font-semibold">{product.name}</p>
         </a>
         <p class="text-xs overflow-y-auto font-light max-h-16">
-          {description}
+          {product.description}
         </p>
         <div class="flex justify-between items-center">
           <p class="text-lg">
             {product.offers.priceCurrency} {product.offers.offers[0].price}
           </p>
-          <div className="bg-secondary px-8 py-4 text-tertiary text-xs rounded-[6rem] border-none">
-            <AddToCartButton
-              productID={product.productID}
-              seller={product.offers.offers[0].seller}
-              eventParams={{ items: [] }}
-            />
-          </div>
+          <AddToCartButton
+            productID={product.productID}
+            seller={product.offers.offers[0].seller}
+            eventParams={{ items: [] }}
+          />
         </div>
       </div>
     </div>
@@ -138,9 +117,6 @@ function ProductCard({ product }: { product: Product }) {
 const ProductCarousel = ({ products }: { products: Product[] }) => {
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
   const product = products[currentProductIndex] as Product;
-  const { title, description } = extractTitleAndDescription(
-    product.description,
-  );
 
   const handleNextProduct = () => {
     setCurrentProductIndex((
@@ -191,7 +167,7 @@ const ProductCarousel = ({ products }: { products: Product[] }) => {
               <img
                 src={product.image[0].url}
                 alt={product.image[0].name}
-                class="w-28 h-28 max-w-fit"
+                class="w-28 h-28 max-w-fit rounded-md"
               />
             </a>
             <div class="flex flex-col gap-4 w-full max-w-[10rem]">
@@ -201,19 +177,17 @@ const ProductCarousel = ({ products }: { products: Product[] }) => {
                 rel="noopener noreferrer"
               >
                 <h2 class="font-bold">
-                  {title ?? product.name}
+                  {product.name}
                 </h2>
               </a>
               <p class="font-light">
                 {product.offers.priceCurrency} {product.offers.offers[0].price}
               </p>
-              <div className="bg-secondary text-xs w-full rounded-3xl text-tertiary py-1 px-2">
-                <AddToCartButton
-                  productID={product.productID}
-                  seller={product.offers.offers[0].seller}
-                  eventParams={{ items: [] }}
-                />
-              </div>
+              <AddToCartButton
+                productID={product.productID}
+                seller={product.offers.offers[0].seller}
+                eventParams={{ items: [] }}
+              />
             </div>
           </div>
         </div>
