@@ -362,7 +362,7 @@ function FilePreview({ fileUrl, removeFile }: FilePreviewProps) {
       />
       <button
         onClick={removeFile}
-        class="bg-gray-500 hover:bg-black rounded-full h-fit absolute right-1 top-1 -translate-y-1/2 translate-x-1/2 group"
+        class="bg-chatSecondary hover:shadow-custom-inset rounded-full h-fit absolute right-1 top-1 -translate-y-1/2 translate-x-1/2 group"
       >
         <Icon
           id="Close"
