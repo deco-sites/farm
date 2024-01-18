@@ -32,7 +32,7 @@ export function ChatStep(
 ) {
   return (
     <div class="text-tertiary min-h-full flex justify-between w-full flex-row">
-      <div class="min-w-2/5 flex flex-col justify-between gap-4 w-full">
+      <div class="min-w-[40%] sm:min-w-[23rem] flex flex-col justify-between gap-4 w-full max-w-[25rem]">
         <Messages
           messageList={messageList.value}
           send={send}
@@ -44,7 +44,7 @@ export function ChatStep(
         </div>
         <InputArea send={send} addNewMessageToList={addNewMessageToList} />
       </div>
-      <div class="hidden lg:flex max-w-[60%] min-w-0 sm:min-w-[60%]">
+      <div class="hidden lg:flex max-w-[60%] w-[inherit]">
         <FunctionCalls messages={messageList.value} />
       </div>
     </div>
