@@ -106,7 +106,7 @@ function ProductCard({ product }: { product: Product }) {
           class="w-fit h-44 max-w-fit rounded-md"
         />
       </a>
-      <div class="flex flex-col w-fit h-full space-y-4 py-4">
+      <div class="flex flex-col w-full h-full space-y-4 py-4">
         <a
           href={product.url}
           target="_self"
