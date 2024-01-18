@@ -15,12 +15,20 @@ export default {
         chatSecondary: "var(--secondary-color-hex)",
         chatTertiary: "var(--tertiary-color-hex)",
       },
+      boxShadow: {
+        "custom-inset": "inset 0px 0px 10px 10px rgb(0 0 0 / 0.05)",
+      },
       keyframes: {
         sliding: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
       },
+    },
+  },
+  variants: {
+    extend: {
+      boxShadow: ["hover"],
     },
   },
 };

@@ -242,10 +242,10 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
       <style>
         {`
           .bg-primary-90 {
-            background-color: rgba(var(--primary-color), 0.90);
+            background-color: rgba(var(--primary-color), 0.95);
           }
-          .bg-secondary-50 {
-            background-color: rgba(var(--secondary-color), 0.50);
+          .bg-secondary-70 {
+            background-color: rgba(var(--secondary-color), 0.70);
           }
           .bg-secondary:hover {
             box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
@@ -299,7 +299,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
               style={{ animation: "pulse 1.5s infinite" }}
               class={`mr-6 ${
                 isCartExpanded ? "sm:mr-[28rem]" : "sm:mr-8"
-              } mb-8 sm:mb-0 bg-chatSecondary rounded-full flex justify-center items-center w-16 h-16 p-4`}
+              } mb-8 hover:shadow-custom-inset sm:mb-0 bg-chatSecondary rounded-full flex justify-center items-center w-16 h-16 p-4 shadow-md`}
             >
               {logo
                 ? (

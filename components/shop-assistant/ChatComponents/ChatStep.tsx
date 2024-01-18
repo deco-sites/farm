@@ -278,7 +278,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
             fileUrl={URL.createObjectURL(currentFile)}
           />
         )}
-        <div class="flex p-4 items-center relative w-full bg-secondary-50 rounded-[2rem]">
+        <div class="flex p-4 items-center relative w-full bg-secondary-70 rounded-[2rem]">
           <AutosizeTextarea
             maxRows={7}
             minRows={1}

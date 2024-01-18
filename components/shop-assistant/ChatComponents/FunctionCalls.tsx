@@ -56,7 +56,22 @@ export function FunctionCalls({ messages }: { messages: Message[] }) {
   );
 }
 
+function extractTitleAndDescription(htmlString: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+
+  const title = doc.querySelector("h1, h2, h3, h4, h5, h6")?.textContent ||
+    "";
+
+  const titleElement = doc.querySelector("h1, h2, h3, h4, h5, h6");
+  if (titleElement) titleElement.remove();
+  const description = doc.body.textContent || "";
+
+  return { title, description };
+}
+
 function ProductShelf({ products }: { products: Product[] }) {
+  console.log(products);
   return (
     <div class="flex flex-row lg:flex-col w-auto gap-4 ml-6">
       {products.map((product, index) => (
@@ -75,6 +90,9 @@ function ProductShelf({ products }: { products: Product[] }) {
 }
 
 function ProductCard({ product }: { product: Product }) {
+  const { title, description } = extractTitleAndDescription(
+    product.description,
+  );
   return (
     <div class="flex flex-row items-center bg-white gap-4 rounded-2xl text-black p-4">
       <a
@@ -97,7 +115,7 @@ function ProductCard({ product }: { product: Product }) {
           <p class="text-xs font-semibold">{product.name}</p>
         </a>
         <p class="text-xs overflow-y-auto font-light max-h-16">
-          {product.description}
+          {description}
         </p>
         <div class="flex justify-between items-center">
           <p class="text-lg">
@@ -117,6 +135,9 @@ function ProductCard({ product }: { product: Product }) {
 const ProductCarousel = ({ products }: { products: Product[] }) => {
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
   const product = products[currentProductIndex] as Product;
+  const { title, description } = extractTitleAndDescription(
+    product.description,
+  );
 
   const handleNextProduct = () => {
     setCurrentProductIndex((

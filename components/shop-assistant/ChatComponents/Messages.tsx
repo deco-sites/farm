@@ -252,11 +252,11 @@ function OptionsButtonGroup(
     <div>
       {(content as MessageContentText).options?.length > 0 && (
         <div class="flex flex-col justify-start space-y-2">
-          <div class="text-white/80 text-xs font-light">Quick Replies</div>
+          <div class="text-tertiary text-xs font-light">Quick Replies</div>
           <div class="gap-2 flex flex-row items-center">
             {(content as MessageContentText).options.map((option, index) => (
               <button
-                class="p-2 text-tertiary rounded-2xl bg-chatSecondary text-xs"
+                class="p-2 text-tertiary rounded-2xl bg-chatSecondary text-xs hover:shadow-custom-inset"
                 key={index}
                 onClick={() => sendBtnClickMessage(option)}
               >
@@ -285,8 +285,8 @@ function UserMessage({ message }: { message: UserMsg }) {
 
   return (
     <div
-      class={`mb-3 p-2 rounded-xl ${
-        isAudioMessage ? "" : "bg-secondary-50"
+      class={`mb-3 p-2 rounded-xl rounded-br-none ${
+        isAudioMessage ? "" : "bg-secondary-70"
       } text-tertiary text-sm max-w-s w-fit self-end`}
     >
       {message.content.map((content, index) => {
