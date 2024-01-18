@@ -44,7 +44,7 @@ export function ChatStep(
         </div>
         <InputArea send={send} addNewMessageToList={addNewMessageToList} />
       </div>
-      <div class="hidden lg:flex max-w-[60%]">
+      <div class="hidden lg:flex max-w-[60%] min-w-0 sm:min-w-[60%]">
         <FunctionCalls messages={messageList.value} />
       </div>
     </div>

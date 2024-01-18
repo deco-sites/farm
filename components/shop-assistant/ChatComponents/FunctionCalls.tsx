@@ -23,7 +23,7 @@ export function FunctionCalls({ messages }: { messages: Message[] }) {
   };
 
   return (
-    <div className="overflow-y-auto overflow-x-auto">
+    <div className="overflow-y-auto overflow-x-auto w-full">
       {(() => {
         const allProducts: Product[] = messages
           .filter((message) => message.type === "function_calls")
@@ -153,7 +153,7 @@ const ProductCarousel = ({ products }: { products: Product[] }) => {
 
   return (
     <div class="flex items-center justify-center h-fit text-black">
-      <div class="bg-white shadow-lg rounded-2xl">
+      <div class="bg-white rounded-2xl">
         <div class="relative text-white">
           <button
             class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary-90 rounded-full ml-2"
