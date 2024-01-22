@@ -149,6 +149,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
     });
 
     userInput.current.value = "";
+    setCurrentFile(null);
   };
 
   const handleUserInput = (e: React.TargetedEvent<HTMLFormElement>) => {
@@ -266,6 +267,10 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
   };
 
   const removeFile = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+
     setCurrentFile(null);
   };
 
