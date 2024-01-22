@@ -102,15 +102,34 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
       userInput.current.value = "";
       setCurrentFile(null);
 
-      const uploadURL = await invoke["ai-assistants"].actions
-        .awsUploadImage({ file: base64 });
-      const description = await invoke["ai-assistants"].actions
-        .describeImage({ uploadURL: uploadURL, userPrompt: inputValue });
+      try {
+        const uploadURL = await invoke["ai-assistants"].actions
+          .awsUploadImage({ file: base64 });
+        const descriptionResponse = await invoke["ai-assistants"].actions
+          .describeImage({ uploadURL: uploadURL, userPrompt: inputValue });
 
-      const imageDescription = description.choices[0].message.content;
-      const concatenatedMessage = `${inputValue}. Find ${imageDescription}`;
+        if (descriptionResponse instanceof Response) {
+          const error = await descriptionResponse.json();
+          throw new Error(error);
+        }
 
-      send(concatenatedMessage);
+        const imageDescription = descriptionResponse.choices[0].message.content;
+        const concatenatedMessage = `${inputValue}. Find ${imageDescription}`;
+
+        send(concatenatedMessage);
+      } catch (error) {
+        const errorMessage = error.cause.error ||
+          "Something went wrong. Please try again.";
+        addNewMessageToList({
+          content: [{
+            type: "text",
+            value: errorMessage || "Something went wrong. Please try again.",
+            options: [],
+          }],
+          type: "message",
+          role: "assistant",
+        });
+      }
 
       return;
     }
@@ -308,7 +327,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
                 aria-label="File input"
                 onChange={handleFileChange}
                 class="sr-only" // Hides visually but keeps it accessible
-                accept="image/*"
+                accept="image/png, image/jpeg, image/gif, image/webp" //image has to be below 20 MB in size and is of one the following formats: ['png', 'jpeg', 'gif', 'webp'].
               />
             </div>
             <div

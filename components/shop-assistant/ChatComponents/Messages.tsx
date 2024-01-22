@@ -321,7 +321,7 @@ function TypingIndicator({ show }: { show: boolean }) {
           100% { opacity: 1; }
         }`}
       </style>
-      <div style={{ animation: "messageAppear 200ms linear" }}>
+      <div style={{ animation: "messageAppear 200ms linear" }} class="text-sm">
         Typing
         <span
           style={{ animation: "blink 0.7s infinite", animationDelay: "0.1s" }}
