@@ -100,7 +100,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
       const base64 = await getBase64(currentFile);
 
       userInput.current.value = "";
-      setCurrentFile(null);
+      resetFileInput();
 
       try {
         const uploadURL = await invoke["ai-assistants"].actions
@@ -149,7 +149,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
     });
 
     userInput.current.value = "";
-    setCurrentFile(null);
+    resetFileInput();
   };
 
   const handleUserInput = (e: React.TargetedEvent<HTMLFormElement>) => {
@@ -266,11 +266,10 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
     }
   };
 
-  const removeFile = () => {
+  const resetFileInput = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-
     setCurrentFile(null);
   };
 
@@ -298,7 +297,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
       <form onSubmit={handleUserInput} class="sticky">
         {currentFile && (
           <FilePreview
-            removeFile={removeFile}
+            resetFileInput={resetFileInput}
             fileUrl={URL.createObjectURL(currentFile)}
           />
         )}
@@ -360,10 +359,10 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
 
 type FilePreviewProps = {
   fileUrl: string;
-  removeFile: () => void;
+  resetFileInput: () => void;
 };
 
-function FilePreview({ fileUrl, removeFile }: FilePreviewProps) {
+function FilePreview({ fileUrl, resetFileInput }: FilePreviewProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -385,7 +384,7 @@ function FilePreview({ fileUrl, removeFile }: FilePreviewProps) {
         class="w-14 rounded-xl relative hover:cursor-pointer"
       />
       <button
-        onClick={removeFile}
+        onClick={resetFileInput}
         class="bg-chatSecondary hover:shadow-custom-inset rounded-full h-fit absolute right-1 top-1 -translate-y-1/2 translate-x-1/2 group"
       >
         <Icon
