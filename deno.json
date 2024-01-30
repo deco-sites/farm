@@ -3,7 +3,7 @@
     "deco-sites/farm/": "./",
     "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.52.2/",
-    "apps/": "https://denopkg.com/deco-cx/apps@e389a0edb4b1385ce1994775ffb3f74cedeb8d69/",
+    "apps/": "https://denopkg.com/deco-cx/apps@684309ba5a1e7ef5bf632451e19802a8fc7de24b/",
     "$fresh/": "https://deno.land/x/fresh@1.6.3/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",

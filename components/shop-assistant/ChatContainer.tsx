@@ -1,5 +1,5 @@
 import { Signal } from "@preact/signals";
-import { Content, Message } from "./types/shop-assistant.ts";
+import { Content, Ids, Message } from "./types/shop-assistant.ts";
 import { useEffect, useState } from "preact/hooks";
 import { ChatStep } from "./ChatComponents/ChatStep.tsx";
 import Image from "apps/website/components/Image.tsx";
@@ -7,21 +7,25 @@ import Icon from "../ui/Icon.tsx";
 
 type ChatProps = {
   messageList: Signal<Message[]>;
+  assistantIds: Signal<Ids>;
   addNewMessageToList: ({ content, type, role }: Message) => void;
   send: (text: string) => void;
   handleShowChat: () => void;
   logo?: { src: string; alt: string };
   updateMessageListArray: (messageList: Message[]) => void;
+  updateIds: (ids: Ids) => void;
 };
 
 export function ChatContainer(
   {
     messageList,
+    assistantIds,
     addNewMessageToList,
     send,
     handleShowChat,
     logo,
     updateMessageListArray,
+    updateIds,
   }: ChatProps,
 ) {
   const [shouldAnimateWidth, setShouldAnimateWidth] = useState(false);
@@ -47,6 +51,7 @@ export function ChatContainer(
       )
     ) {
       updateMessageListArray([]);
+      updateIds({ threadId: "", assistantId: "" });
     }
   };
 
@@ -102,6 +107,7 @@ export function ChatContainer(
         </div>
         <ChatStep
           send={send}
+          assistantIds={assistantIds}
           messageList={messageList}
           addNewMessageToList={addNewMessageToList}
           updateMessageListArray={updateMessageListArray}

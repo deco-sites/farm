@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { useCallback, useEffect, useState } from "preact/hooks";
 import { ChatContainer } from "./ChatContainer.tsx";
-import { AssistantMsg, Message } from "./types/shop-assistant.ts";
+import { AssistantMsg, Ids, Message } from "./types/shop-assistant.ts";
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import { ChatProvider, useCart } from "./ChatContext.tsx";
@@ -37,6 +37,7 @@ export interface Props {
 function Chat({ mainColors, logo, openChat = false }: Props) {
   const ws = useSignal<WebSocket | null>(null);
   const messageList = useSignal<Message[]>([]);
+  const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
   const [showChat, setShowChat] = useState<boolean>(false);
   const { isCartExpanded, toggleCart } = useCart();
   const { displayCart } = useUI();
@@ -112,7 +113,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
     );
 
     // Messages with type function_call, start_function_call or message belongs to this category of messages
-    const hadnleJSONMessage = (data: AssistantMsg) => {
+    const handleJSONMessage = (data: AssistantMsg) => {
       addNewMessageToList({
         content: data.content,
         type: data.type,
@@ -135,7 +136,14 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
       try {
         if (isJSON(event.data)) {
           const parsedData = JSON.parse(event.data);
-          hadnleJSONMessage(parsedData);
+          if (parsedData.type === "Id") {
+            updateIds({
+              threadId: parsedData.threadId,
+              assistantId: parsedData.assistantId,
+            });
+          } else {
+            handleJSONMessage(parsedData);
+          }
         } else {
           handlePureStringMessage(event.data);
         }
@@ -196,6 +204,12 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
     });
   };
 
+  const updateIds = (newIds: Ids): void => {
+    assistantIds.value = newIds;
+    sessionStorage.setItem("threadId", newIds.threadId);
+    sessionStorage.setItem("assistantId", newIds.assistantId);
+  };
+
   const updateMessageListArray = (newMessageList: Message[]): void => {
     const isChatOpen = JSON.parse(
       sessionStorage.getItem("isOpen") ?? "false",
@@ -214,6 +228,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
     sessionStorage.setItem("isOpen", JSON.stringify(isChatOpen));
   };
 
+  // TODO(@ItamarRocha): add get ids from session storage and send it to the server
   const loadChatSession = () => {
     const chatHistory = JSON.parse(
       sessionStorage.getItem("chatHistory") ?? "[]",
@@ -286,10 +301,12 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
               <ChatContainer
                 logo={logo}
                 send={send}
+                assistantIds={assistantIds}
                 messageList={messageList}
                 addNewMessageToList={addNewMessageToList}
                 handleShowChat={handleClick}
                 updateMessageListArray={updateMessageListArray}
+                updateIds={updateIds}
               />
             </div>
           )

@@ -132,3 +132,8 @@ export type MessageContent =
   | MessageContentFile
   | MessageContentAudio
   | Content;
+
+export interface Ids {
+  threadId: string;
+  assistantId: string;
+}

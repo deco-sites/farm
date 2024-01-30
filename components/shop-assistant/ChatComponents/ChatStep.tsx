@@ -1,6 +1,7 @@
 import { useRef } from "preact/hooks";
 import { Messages } from "./Messages.tsx";
 import {
+  Ids,
   Message,
   MessageContentAudio,
   MessageContentFile,
@@ -15,6 +16,7 @@ import AutosizeTextarea from "$store/components/autosize-textarea/AutosizeTextar
 
 type ChatProps = {
   messageList: Signal<Message[]>;
+  assistantIds: Signal<Ids>;
   addNewMessageToList: ({ content, type, role }: Message) => void;
   send: (text: string) => void;
   updateMessageListArray: (messageList: Message[]) => void;
@@ -28,7 +30,13 @@ type ProcessedFileInfo = {
 };
 
 export function ChatStep(
-  { messageList, addNewMessageToList, send, updateMessageListArray }: ChatProps,
+  {
+    messageList,
+    assistantIds,
+    addNewMessageToList,
+    send,
+    updateMessageListArray,
+  }: ChatProps,
 ) {
   return (
     <div class="text-tertiary min-h-full flex justify-between w-full flex-row">
@@ -42,7 +50,11 @@ export function ChatStep(
         <div class="lg:hidden block">
           <FunctionCalls messages={messageList.value} />
         </div>
-        <InputArea send={send} addNewMessageToList={addNewMessageToList} />
+        <InputArea
+          send={send}
+          addNewMessageToList={addNewMessageToList}
+          assistantIds={assistantIds.value}
+        />
       </div>
       <div class="hidden lg:flex max-w-[60%] w-[inherit]">
         <FunctionCalls messages={messageList.value} />
@@ -54,6 +66,7 @@ export function ChatStep(
 type InputAreaProps = {
   send: (text: string) => void;
   addNewMessageToList: ({ content, type, role }: Message) => void;
+  assistantIds: Ids;
 };
 
 function getBase64(file: File | Blob): Promise<string | ArrayBuffer | null> {
@@ -65,7 +78,9 @@ function getBase64(file: File | Blob): Promise<string | ArrayBuffer | null> {
   });
 }
 
-function InputArea({ send, addNewMessageToList }: InputAreaProps) {
+function InputArea(
+  { send, addNewMessageToList, assistantIds }: InputAreaProps,
+) {
   const [currentFile, setCurrentFile] = useState<File | null>(
     null,
   );
@@ -104,9 +119,13 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
 
       try {
         const uploadURL = await invoke["ai-assistants"].actions
-          .awsUploadImage({ file: base64 });
+          .awsUploadImage({ file: base64, ids: assistantIds });
         const descriptionResponse = await invoke["ai-assistants"].actions
-          .describeImage({ uploadURL: uploadURL, userPrompt: inputValue });
+          .describeImage({
+            uploadURL: uploadURL,
+            userPrompt: inputValue,
+            ids: assistantIds,
+          });
 
         if (descriptionResponse instanceof Response) {
           const error = await descriptionResponse.json();
@@ -237,7 +256,7 @@ function InputArea({ send, addNewMessageToList }: InputAreaProps) {
 
     const base64 = await getBase64(audioBlob);
     const transcription = await invoke["ai-assistants"].actions
-      .transcribeAudio({ file: base64 });
+      .transcribeAudio({ file: base64, ids: assistantIds });
 
     if (!transcription.text) return;
 
