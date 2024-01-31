@@ -43,8 +43,9 @@ import * as $$$$$$35 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$36 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$37 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$38 from "./sections/Links/Shortcuts.tsx";
-import * as $$$$$$39 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$40 from "./sections/Header/Header.tsx";
+import * as $$$$$$39 from "./sections/Chat.tsx";
+import * as $$$$$$40 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$41 from "./sections/Header/Header.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -58,6 +59,7 @@ const manifest = {
     "deco-sites/farm/sections/Category/CategoryBanner.tsx": $$$$$$2,
     "deco-sites/farm/sections/Category/CategoryGrid.tsx": $$$$$$4,
     "deco-sites/farm/sections/Category/CategoryList.tsx": $$$$$$3,
+    "deco-sites/farm/sections/Chat.tsx": $$$$$$39,
     "deco-sites/farm/sections/Content/Benefits.tsx": $$$$$$20,
     "deco-sites/farm/sections/Content/BlogPosts.tsx": $$$$$$14,
     "deco-sites/farm/sections/Content/Faq.tsx": $$$$$$19,
@@ -67,7 +69,7 @@ const manifest = {
     "deco-sites/farm/sections/Content/Testimonials.tsx": $$$$$$16,
     "deco-sites/farm/sections/Footer/Footer.tsx": $$$$$$1,
     "deco-sites/farm/sections/Gallery.tsx": $$$$$$0,
-    "deco-sites/farm/sections/Header/Header.tsx": $$$$$$40,
+    "deco-sites/farm/sections/Header/Header.tsx": $$$$$$41,
     "deco-sites/farm/sections/Images/BannerGrid.tsx": $$$$$$6,
     "deco-sites/farm/sections/Images/Carousel.tsx": $$$$$$8,
     "deco-sites/farm/sections/Images/ImageGallery.tsx": $$$$$$7,
@@ -81,9 +83,8 @@ const manifest = {
     "deco-sites/farm/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$31,
     "deco-sites/farm/sections/Miscellaneous/CookieConsent.tsx": $$$$$$32,
     "deco-sites/farm/sections/Miscellaneous/Slide.tsx": $$$$$$33,
-    "deco-sites/farm/sections/Newsletter/Newsletter.tsx": $$$$$$39,
-    "deco-sites/farm/sections/Product/ImageGalleryFrontBack.tsx":
-      $$$$$$27,
+    "deco-sites/farm/sections/Newsletter/Newsletter.tsx": $$$$$$40,
+    "deco-sites/farm/sections/Product/ImageGalleryFrontBack.tsx": $$$$$$27,
     "deco-sites/farm/sections/Product/ImageGallerySlider.tsx": $$$$$$26,
     "deco-sites/farm/sections/Product/NotFound.tsx": $$$$$$30,
     "deco-sites/farm/sections/Product/NotFoundChallenge.tsx": $$$$$$22,
