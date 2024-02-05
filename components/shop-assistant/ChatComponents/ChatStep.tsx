@@ -48,7 +48,10 @@ export function ChatStep(
           updateMessageListArray={updateMessageListArray}
         />
         <div class="lg:hidden block">
-          <FunctionCalls messages={messageList.value} />
+          <FunctionCalls
+            messages={messageList.value}
+            assistantIds={assistantIds.value}
+          />
         </div>
         <InputArea
           send={send}
@@ -57,7 +60,10 @@ export function ChatStep(
         />
       </div>
       <div class="hidden lg:flex max-w-[60%] w-[inherit]">
-        <FunctionCalls messages={messageList.value} />
+        <FunctionCalls
+          messages={messageList.value}
+          assistantIds={assistantIds.value}
+        />
       </div>
     </div>
   );

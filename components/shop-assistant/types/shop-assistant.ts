@@ -1,4 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
+// TODO(@ItamarRocha): Import these from the other Product definition
 export interface Content {
   name: string;
   props: {

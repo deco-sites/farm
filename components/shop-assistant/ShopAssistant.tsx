@@ -6,6 +6,7 @@ import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import { ChatProvider, useCart } from "./ChatContext.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
+import { sendEvent } from "$store/sdk/analytics.tsx";
 
 export interface MainColors {
   /**
@@ -249,6 +250,16 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
 
   const handleClick = () => {
     setShowChat(!showChat);
+    sendEvent({
+      name: "select_promotion",
+      params: {
+        promotion_id: "chat-sales-assistant",
+        promotion_name: "chat-sales-assistant",
+        assistantId: assistantIds.value.assistantId,
+        assistantThreadID: assistantIds.value.threadId,
+        openChat: !showChat,
+      },
+    });
     sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
   };
 
